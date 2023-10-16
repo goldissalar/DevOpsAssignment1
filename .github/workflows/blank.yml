@@ -14,30 +14,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-      working-directory: web-app/web-app/blog
+    
+    - name: Set working directory
+      run: cd C:/Users/goldi/OneDrive/Bilder/FH/3.Semester/DevOps/assignment1/DevOpsAssignment1/web-app/web-app/blog
+      shell: bash
+
     - run: npm install
     - run: npm run lint
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: docker build -t web-app .
+  # ... (other job configurations)
 
-  audit:
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: npm install
-    - run: npm audit
-
-  # Bonus: Push to Docker Hub on release
   push:
     if: github.ref == 'refs/heads/release'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: Set working directory
+      run: cd C:/Users/goldi/OneDrive/Bilder/FH/3.Semester/DevOps/assignment1/DevOpsAssignment1/web-app/web-app/blog
+      shell: bash
+
     - run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
     - run: docker build -t web-app .
     - run: docker tag web-app:latest ${{ secrets.DOCKER_HUB_USERNAME }}/web-app:latest
