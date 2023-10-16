@@ -20,14 +20,11 @@ jobs:
       with:
         node-version: '14'
 
-    - name: Change to the 'web-app' directory
-      run: cd web-app
+    - name: Install project dependencies in the 'web-app' directory
+      run: npm install --prefix web-app
 
-    - name: Install project dependencies
-      run: npm install
-
-    - name: Run linter
-      run: npm run lint
+    - name: Run linter in the 'web-app' directory
+      run: npm run lint --prefix web-app
 
   build:
     runs-on: ubuntu-latest
