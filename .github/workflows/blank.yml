@@ -21,7 +21,7 @@ jobs:
         npm install
         npm run eslint
 
-    -name: Lint
+    - name: Lint
     working-directory: web-app/web-app/blog
     run: |
       npm run lint
