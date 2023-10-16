@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install Dependencies and Lint
-      working-directory: DevOpsAssignment1/web-app/web-app/blog
+      working-directory: web-app/web-app/blog
       run: |
         npm install
         npm run lint
