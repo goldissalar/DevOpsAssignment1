@@ -15,11 +15,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Dependencies and Lint
+    - name: Install Dependencies
       working-directory: web-app/web-app/blog
       run: |
         npm install
-        npm run lint
+        npm run eslint
+
+    -name: Lint
+    working-directory: web-app/web-app/blog
+    run: |
+      npm run lint
 
   push:
     if: github.ref == 'refs/heads/release'
