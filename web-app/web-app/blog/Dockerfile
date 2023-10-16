@@ -1,12 +1,14 @@
-# Stage 1: Build the application
-FROM node:14 as build
+FROM node:18 AS builder
 WORKDIR /app
-COPY package*.json ./
+COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: Create the production image
-FROM nginx:alpine
-COPY --from=build /app/out /usr/share/nginx/html
-EXPOSE 80
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/package.json ./
+RUN npm install --only=production
+EXPOSE 3000
+CMD ["npm", "start"]
