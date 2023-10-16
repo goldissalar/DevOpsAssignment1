@@ -10,33 +10,25 @@ on:
 
 jobs:
   lint:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install project dependencies in the 'web-app' directory
-      run: npm install --prefix web-app
-
-    - name: Install project dependencies
-      run: npm install
-
-    - name: Run linter in the 'web-app' directory
-      run: npm run lint --prefix web-app
+      - name: Run linter
+        run: npm install
+      - run: npm run lint
 
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Change to the 'web-app' directory
-        run: cd web-app
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -53,18 +45,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Change to the 'web-app' directory
-        run: cd web-app
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '14'
 
       - name: Audit dependencies
-        run: |
-          npm install
-          npm audit
+        run: npm install
+      - run: npm audit
 
       - name: Push Docker image to Docker Hub
         run: |
