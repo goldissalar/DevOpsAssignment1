@@ -21,7 +21,7 @@ jobs:
         npm install
         npm install eslint  # Install ESLint
 
-        - name: Setup ESLint Configuration
+    - name: Setup ESLint Configuration
       working-directory: web-app/web-app/blog
       run: |
         echo "module.exports = {" > .eslintrc.js
