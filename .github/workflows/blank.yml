@@ -19,7 +19,7 @@ jobs:
       working-directory: web-app/web-app/blog
       run: |
         npm install
-        npm install eslint  # Install ESLint
+        npm install eslint babel-eslint
 
     - name: Setup ESLint Configuration
       working-directory: web-app/web-app/blog
