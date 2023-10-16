@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      working-directory: web-app/web-app/blog
     - run: npm install
     - run: npm run lint
 
