@@ -1,9 +1,11 @@
 module.exports = {
-    root: true,
-    parser: '@babel/eslint-parser',
-    extends: ['eslint:recommended'], // Use recommended ESLint rules
-    rules: {
-      // Add specific rules here, if needed
-    },
-  };
-  
+  root: true,
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false, // If you don't have a separate Babel configuration file
+  },
+  extends: ['eslint:recommended'],
+  rules: {
+    // Add specific rules here, if needed
+  },
+};
