@@ -12,7 +12,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    working-directory: /home/runner/work/DevOpsAssignment1/web-app/web-app/blog
+      working-directory: /home/runner/work/DevOpsAssignment1/web-app/web-app/blog
     steps:
     - uses: actions/checkout@v2
     - run: npm install
