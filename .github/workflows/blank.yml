@@ -14,29 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm run lint
 
-    - name: Install Dependencies
-      working-directory: web-app/web-app/blog
-      run: |
-        npm install
-        npm install eslint babel-eslint
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: docker build -t web-app .
 
-    - name: Setup ESLint Configuration
-      working-directory: web-app/web-app/blog
-      run: |
-        echo "module.exports = {" > .eslintrc.js
-        echo "  root: true," >> .eslintrc.js
-        echo "  parser: 'babel-eslint'," >> .eslintrc.js
-        echo "  extends: ['eslint:recommended']," >> .eslintrc.js
-        echo "  rules: {" >> .eslintrc.js
-        echo "    // Add specific rules here, if needed" >> .eslintrc.js
-        echo "  }," >> .eslintrc.js
-        echo "};" >> .eslintrc.js
-
-    - name: Lint
-      working-directory: web-app/web-app/blog
-      run: |
-        npm run lint
+  audit:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/release'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm install
+    - run: npm audit
 
   push:
     if: github.ref == 'refs/heads/release'
