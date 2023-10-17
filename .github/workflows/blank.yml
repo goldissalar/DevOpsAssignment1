@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - run: npm cache clean --force
+      working-directory: ./web-app/web-app/blog
     - run: npm install
       working-directory: ./web-app/web-app/blog
     - run: npm run lint
